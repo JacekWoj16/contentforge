@@ -2,7 +2,7 @@
   "name": "contentforge",
   "version": "0.1.0",
   "private": true,
-  "description": "Headless CMS demo: Strapi 5 + Next.js 15 App Router",
+  "description": "Headless CMS demo: Strapi 5 + Next.js 16 App Router",
   "engines": {
     "node": ">=20.0.0 <23.0.0"
   },
