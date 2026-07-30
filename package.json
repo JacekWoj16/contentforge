@@ -1,0 +1,16 @@
+{
+  "name": "contentforge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Headless CMS demo: Strapi 5 + Next.js 15 App Router",
+  "engines": {
+    "node": ">=20.0.0 <23.0.0"
+  },
+  "scripts": {
+    "dev:cms": "npm run develop --prefix apps/cms",
+    "dev:web": "npm run dev --prefix apps/web",
+    "build:web": "npm run build --prefix apps/web",
+    "lint:web": "npm run lint --prefix apps/web",
+    "test:web": "npm run test --prefix apps/web"
+  }
+}
