@@ -7,7 +7,7 @@ export interface BlocksCaseStudyList extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    case_studies: Schema.Attribute.Relation<
+    caseStudies: Schema.Attribute.Relation<
       'oneToMany',
       'api::case-study.case-study'
     >;

@@ -9,7 +9,7 @@
     "heading": {
       "type": "string"
     },
-    "case_studies": {
+    "caseStudies": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::case-study.case-study"

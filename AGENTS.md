@@ -112,3 +112,7 @@ Nie wprowadzaj bez pytania:
   Zapisuj też odrzucone alternatywy, nie tylko wybraną.
 - Zanim uznasz coś za skończone: `npm run lint:web` i `npm run build:web`
   muszą przechodzić.
+- **`populate` musi pokrywać typ.** Jeśli typ w `apps/web/src/types/cms.ts`
+  deklaruje pole relacyjne, komponentowe lub media, zapytanie w
+  `strapi.ts` musi je populate'ować. Brak populate objawia się jako
+  `undefined` w miejscu, gdzie typ obiecuje tablicę.
