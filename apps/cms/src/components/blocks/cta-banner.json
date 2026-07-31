@@ -16,7 +16,7 @@
     "cta": {
       "type": "component",
       "component": "shared.link",
-      "repeatable": true
+      "repeatable": false
     }
   },
   "config": {}

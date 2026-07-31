@@ -22,7 +22,7 @@ export interface BlocksCtaBanner extends Struct.ComponentSchema {
     icon: 'landscape';
   };
   attributes: {
-    cta: Schema.Attribute.Component<'shared.link', true>;
+    cta: Schema.Attribute.Component<'shared.link', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     text: Schema.Attribute.Text;
   };
@@ -35,11 +35,9 @@ export interface BlocksHero extends Struct.ComponentSchema {
     icon: 'write';
   };
   attributes: {
-    caseStudyList: Schema.Attribute.Component<'blocks.case-study-list', false>;
     cta: Schema.Attribute.Component<'shared.link', false>;
     heading: Schema.Attribute.String & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    stats: Schema.Attribute.Component<'blocks.stats', true>;
     subheading: Schema.Attribute.Text;
   };
 }

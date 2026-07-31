@@ -595,8 +595,10 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
       [
         'blocks.hero',
         'blocks.rich-text',
-        'blocks.cta-banner',
         'blocks.services-grid',
+        'blocks.stats',
+        'blocks.case-study-list',
+        'blocks.cta-banner',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -641,7 +643,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    seo: Schema.Attribute.Component<'shared.seo', true>;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     summary: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{

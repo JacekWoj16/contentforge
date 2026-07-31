@@ -27,16 +27,6 @@
       "type": "component",
       "component": "shared.link",
       "repeatable": false
-    },
-    "stats": {
-      "type": "component",
-      "component": "blocks.stats",
-      "repeatable": true
-    },
-    "caseStudyList": {
-      "type": "component",
-      "component": "blocks.case-study-list",
-      "repeatable": false
     }
   },
   "config": {}
