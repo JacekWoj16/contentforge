@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_metrics",
+  "info": {
+    "displayName": "Metric",
+    "icon": "chartCircle"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "string",
+      "required": true
+    },
+    "unit": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

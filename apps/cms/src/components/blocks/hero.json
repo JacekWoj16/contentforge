@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_blocks_heroes",
+  "info": {
+    "displayName": "hero",
+    "icon": "write"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "subheading": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cta": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": false
+    },
+    "stats": {
+      "type": "component",
+      "component": "blocks.stats",
+      "repeatable": true
+    },
+    "caseStudyList": {
+      "type": "component",
+      "component": "blocks.case-study-list",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

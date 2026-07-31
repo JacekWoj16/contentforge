@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blocks_case_study_lists",
+  "info": {
+    "displayName": "case-study-list",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "case_studies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::case-study.case-study"
+    }
+  },
+  "config": {}
+}

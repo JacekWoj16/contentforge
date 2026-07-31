@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blocks_cta_banners",
+  "info": {
+    "displayName": "cta-banner",
+    "icon": "landscape"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text"
+    },
+    "cta": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

@@ -23,3 +23,6 @@ coverage/
 *.log
 .DS_Store
 .vscode/
+
+# local, uncommitted notes
+*.local.md

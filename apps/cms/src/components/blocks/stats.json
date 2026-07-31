@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blocks_stats",
+  "info": {
+    "displayName": "stats",
+    "icon": "chartPie"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "metrics": {
+      "type": "component",
+      "component": "shared.metric",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
