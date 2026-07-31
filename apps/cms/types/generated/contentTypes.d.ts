@@ -628,7 +628,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    case_studies: Schema.Attribute.Relation<
+    caseStudies: Schema.Attribute.Relation<
       'manyToMany',
       'api::case-study.case-study'
     >;

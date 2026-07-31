@@ -32,7 +32,7 @@
       "component": "shared.seo",
       "repeatable": false
     },
-    "case_studies": {
+    "caseStudies": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::case-study.case-study",

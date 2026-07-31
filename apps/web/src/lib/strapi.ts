@@ -1,6 +1,12 @@
 import qs from "qs";
 
-import type { Article, Global, Page, Service } from "@/types/cms";
+import type {
+  Article,
+  CaseStudy,
+  Global,
+  Page,
+  Service,
+} from "@/types/cms";
 
 const STRAPI_URL = process.env.STRAPI_URL ?? "http://127.0.0.1:1337";
 
@@ -36,12 +42,14 @@ async function fetchFromCms<T>(
   return response.json() as Promise<T>;
 }
 
+const SEO_POPULATE = { populate: "*" };
+
 /**
  * Populate config for a page, declared per block type rather than with a
  * wildcard, so a page request carries only the fields the blocks render.
  */
 const PAGE_POPULATE = {
-  seo: { populate: "*" },
+  seo: SEO_POPULATE,
   blocks: {
     on: {
       "blocks.hero": { populate: { image: true, cta: true } },
@@ -58,6 +66,8 @@ const PAGE_POPULATE = {
   },
 };
 
+/* ------------------------------------------------------------------ pages */
+
 export async function getPageBySlug(slug: string): Promise<Page | null> {
   const { data } = await fetchFromCms<CollectionResponse<Page>>(
     "pages",
@@ -67,6 +77,82 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
 
   return data[0] ?? null;
 }
+
+export async function getPageSlugs(): Promise<string[]> {
+  const { data } = await fetchFromCms<CollectionResponse<Pick<Page, "slug">>>(
+    "pages",
+    { fields: ["slug"], pagination: { pageSize: 100 } },
+    { tags: ["page"] },
+  );
+
+  return data.map((page) => page.slug);
+}
+
+/* --------------------------------------------------------------- services */
+
+export async function getServices(): Promise<Service[]> {
+  const { data } = await fetchFromCms<CollectionResponse<Service>>(
+    "services",
+    { fields: ["title", "slug", "summary", "icon"], sort: ["title:asc"] },
+    { tags: ["service"] },
+  );
+
+  return data;
+}
+
+export async function getServiceBySlug(slug: string): Promise<Service | null> {
+  const { data } = await fetchFromCms<CollectionResponse<Service>>(
+    "services",
+    {
+      filters: { slug: { $eq: slug } },
+      populate: {
+        seo: SEO_POPULATE,
+        caseStudies: { populate: { results: true } },
+      },
+    },
+    { tags: ["service", `service:${slug}`] },
+  );
+
+  return data[0] ?? null;
+}
+
+/* ----------------------------------------------------------- case studies */
+
+export async function getCaseStudies(): Promise<CaseStudy[]> {
+  const { data } = await fetchFromCms<CollectionResponse<CaseStudy>>(
+    "case-studies",
+    {
+      fields: ["title", "slug", "client", "industry", "challenge"],
+      populate: { coverImage: true, results: true },
+      sort: ["title:asc"],
+    },
+    { tags: ["case-study"] },
+  );
+
+  return data;
+}
+
+export async function getCaseStudyBySlug(
+  slug: string,
+): Promise<CaseStudy | null> {
+  const { data } = await fetchFromCms<CollectionResponse<CaseStudy>>(
+    "case-studies",
+    {
+      filters: { slug: { $eq: slug } },
+      populate: {
+        coverImage: true,
+        results: true,
+        seo: SEO_POPULATE,
+        services: true,
+      },
+    },
+    { tags: ["case-study", `case-study:${slug}`] },
+  );
+
+  return data[0] ?? null;
+}
+
+/* --------------------------------------------------------------- articles */
 
 export async function getArticles(): Promise<Article[]> {
   const { data } = await fetchFromCms<CollectionResponse<Article>>(
@@ -82,15 +168,24 @@ export async function getArticles(): Promise<Article[]> {
   return data;
 }
 
-export async function getServices(): Promise<Service[]> {
-  const { data } = await fetchFromCms<CollectionResponse<Service>>(
-    "services",
-    { fields: ["title", "slug", "summary", "icon"], sort: ["title:asc"] },
-    { tags: ["service"] },
+export async function getArticleBySlug(slug: string): Promise<Article | null> {
+  const { data } = await fetchFromCms<CollectionResponse<Article>>(
+    "articles",
+    {
+      filters: { slug: { $eq: slug } },
+      populate: {
+        coverImage: true,
+        author: { populate: { avatar: true } },
+        seo: SEO_POPULATE,
+      },
+    },
+    { tags: ["article", `article:${slug}`] },
   );
 
-  return data;
+  return data[0] ?? null;
 }
+
+/* ----------------------------------------------------------------- global */
 
 /**
  * Global is a single type. Strapi answers 404 while it has no published
@@ -105,7 +200,7 @@ export async function getGlobal(): Promise<Global | null> {
         populate: {
           logo: true,
           navigation: true,
-          defaultSeo: { populate: "*" },
+          defaultSeo: SEO_POPULATE,
         },
       },
       { tags: ["global"] },

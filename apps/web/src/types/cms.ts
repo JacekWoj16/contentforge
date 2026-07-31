@@ -4,6 +4,9 @@
  * Written by hand rather than generated: the frontend only needs the
  * fields it renders, and an explicit contract makes it obvious when the
  * content model and the UI drift apart.
+ *
+ * Fields marked optional are populated only by detail queries. A list
+ * query deliberately leaves them out, so the type says so.
  */
 
 export type Media = {
@@ -52,6 +55,8 @@ export type Service = {
   slug: string;
   summary: string | null;
   icon: string | null;
+  seo?: Seo | null;
+  caseStudies?: CaseStudy[];
 };
 
 export type CaseStudy = {
@@ -64,6 +69,8 @@ export type CaseStudy = {
   solution: string | null;
   results: Metric[];
   coverImage: Media | null;
+  seo?: Seo | null;
+  services?: Service[];
 };
 
 export type Author = {
@@ -71,6 +78,7 @@ export type Author = {
   name: string;
   role: string | null;
   avatar: Media | null;
+  bio?: string | null;
 };
 
 export type Article = {
@@ -78,10 +86,11 @@ export type Article = {
   title: string;
   slug: string;
   excerpt: string | null;
-  body: RichTextNode[] | null;
   coverImage: Media | null;
   author: Author | null;
   publishedAt: string;
+  body?: RichTextNode[] | null;
+  seo?: Seo | null;
 };
 
 /**

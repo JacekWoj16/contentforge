@@ -1,9 +1,8 @@
 import Image from "next/image";
 
 import { SmartLink } from "@/components/SmartLink";
+import { mediaUrl } from "@/lib/media";
 import type { HeroBlock } from "@/types/cms";
-
-const STRAPI_URL = process.env.STRAPI_URL ?? "http://127.0.0.1:1337";
 
 export function Hero({ heading, subheading, image, cta }: HeroBlock) {
   return (
@@ -31,7 +30,7 @@ export function Hero({ heading, subheading, image, cta }: HeroBlock) {
 
         {image ? (
           <Image
-            src={`${STRAPI_URL}${image.url}`}
+            src={mediaUrl(image.url)}
             alt={image.alternativeText ?? ""}
             width={image.width}
             height={image.height}
