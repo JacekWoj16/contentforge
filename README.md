@@ -309,9 +309,15 @@ so the build is still verified — just not twice.
 | CMS | Render | Root directory `apps/cms`, free instance |
 | Database | Render PostgreSQL | Free instance |
 
-The site is fully static. Visitors never talk to the CMS: it is needed at
-build time, when an editor logs in, and when a webhook fires. That is why a
-sleeping free-tier CMS costs the site nothing in speed.
+The site is fully static. Every page is rendered to HTML at build time and
+served from the CDN, so a visitor never reaches the CMS at all. The CMS is
+needed at build time, when an editor logs in, and when a webhook fires.
+
+This is what makes free-tier hosting a reasonable choice rather than a
+compromise: if the CMS sleeps, or goes away entirely, the site keeps
+serving. Only publishing and rebuilding stop working. Under server-side
+rendering the same sleeping instance would mean a minute of waiting for
+every visitor, and the free tier would be unusable.
 
 Known limits of this free setup, listed because they are real:
 
@@ -347,8 +353,11 @@ frontend to expose a bridge, and Contentful's Content Delivery and Preview
 APIs are separate endpoints with separate tokens, which changes the client
 rather than the model.
 
-The block registry and the typed client would survive either move. Only
-`lib/strapi.ts` is CMS-specific.
+The registry pattern survives either move: only the discriminator key
+changes, from `__component` to Storyblok's `component` or Contentful's
+`sys.contentType.sys.id`. The query layer in `lib/strapi.ts` would be
+rewritten, and the response types would need the identifier fields renamed.
+The block components themselves would not be touched.
 
 ---
 
