@@ -37,6 +37,18 @@
       "type": "component",
       "component": "shared.seo",
       "repeatable": false
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 300
+    },
+    "email": {
+      "type": "email"
+    },
+    "socialLinks": {
+      "type": "component",
+      "component": "shared.link",
+      "repeatable": true
     }
   }
 }

@@ -53,6 +53,7 @@ export type Service = {
   documentId: string;
   title: string;
   slug: string;
+  updatedAt?: string;
   summary: string | null;
   icon: string | null;
   seo?: Seo | null;
@@ -63,6 +64,7 @@ export type CaseStudy = {
   documentId: string;
   title: string;
   slug: string;
+  updatedAt?: string;
   client: string;
   industry: string | null;
   challenge: string | null;
@@ -89,6 +91,7 @@ export type Article = {
   coverImage: Media | null;
   author: Author | null;
   publishedAt: string;
+  updatedAt?: string;
   body?: RichTextNode[] | null;
   seo?: Seo | null;
 };
@@ -165,4 +168,7 @@ export type Global = {
   navigation: Link[];
   footerText: string | null;
   defaultSeo: Seo | null;
+  description: string | null;
+  email: string | null;
+  socialLinks: Link[];
 };

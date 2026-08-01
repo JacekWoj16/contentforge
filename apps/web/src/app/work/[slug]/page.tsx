@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { mediaUrl } from "@/lib/media";
+import { JsonLd } from "@/components/JsonLd";
 import { metadataFromSeo } from "@/lib/seo";
+import { breadcrumbSchema, caseStudySchema } from "@/lib/structured-data";
 import { getCaseStudies, getCaseStudyBySlug } from "@/lib/strapi";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -35,6 +37,15 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <article className="py-16">
+      <JsonLd data={caseStudySchema(caseStudy)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Work", path: "/work" },
+          { name: caseStudy.title, path: `/work/${caseStudy.slug}` },
+        ])}
+      />
+
       <div className="mx-auto max-w-3xl px-6">
         <p className="text-sm uppercase tracking-wide text-neutral-500">
           {caseStudy.client}

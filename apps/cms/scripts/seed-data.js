@@ -280,12 +280,12 @@ const pages = [
         __component: 'blocks.services-grid',
         heading: 'What we do',
         intro: 'Four practices, usually combined on a single engagement.',
-        serviceSlugs: ['ux-audit'],
+        serviceSlugs: ['ux-audit', 'web-design', 'frontend-development', 'seo-and-performance'],
       },
       {
         __component: 'blocks.case-study-list',
         heading: 'Recent work',
-        caseStudySlugs: ['specialist-retailer-checkout'],
+        caseStudySlugs: ['specialist-retailer-checkout', 'saas-trial-flow-rebuild'],
       },
       {
         __component: 'blocks.cta-banner',
@@ -448,6 +448,13 @@ const global = {
     { label: 'Contact', href: '/contact', isExternal: false },
   ],
   footerText: 'ContentForge Studio — a fictional agency built to demonstrate a headless CMS architecture.',
+  description:
+    'ContentForge Studio is a UX and development practice. We audit, design and build digital products, then measure whether the changes worked.',
+  email: 'hello@contentforge.studio',
+  socialLinks: [
+    { label: 'GitHub', href: 'https://github.com/JacekWoj16/contentforge', isExternal: true },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/', isExternal: true },
+  ],
   defaultSeo: {
     metaTitle: 'ContentForge Studio',
     metaDescription:

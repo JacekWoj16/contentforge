@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { organizationSchema } from "@/lib/structured-data";
 import { getGlobal } from "@/lib/strapi";
 
 import "./globals.css";
@@ -54,6 +56,10 @@ export default async function RootLayout({
         >
           Skip to main content
         </a>
+
+        {/* Organization is emitted once, in the layout, because every other
+            schema on the site references it by id. */}
+        <JsonLd data={organizationSchema(global)} />
 
         <SiteHeader global={global} />
 

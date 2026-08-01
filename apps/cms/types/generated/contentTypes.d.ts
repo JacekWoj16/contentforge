@@ -563,6 +563,11 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     defaultSeo: Schema.Attribute.Component<'shared.seo', false>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 300;
+      }>;
+    email: Schema.Attribute.Email;
     footerText: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -574,6 +579,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     navigation: Schema.Attribute.Component<'shared.link', true>;
     publishedAt: Schema.Attribute.DateTime;
     siteName: Schema.Attribute.String & Schema.Attribute.Required;
+    socialLinks: Schema.Attribute.Component<'shared.link', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

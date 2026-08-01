@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/JsonLd";
 import { metadataFromSeo } from "@/lib/seo";
+import { breadcrumbSchema, serviceSchema } from "@/lib/structured-data";
 import { getServiceBySlug, getServices } from "@/lib/strapi";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -35,6 +37,15 @@ export default async function ServicePage({ params }: Props) {
 
   return (
     <article className="py-16">
+      <JsonLd data={serviceSchema(service)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: service.title, path: `/services/${service.slug}` },
+        ])}
+      />
+
       <div className="mx-auto max-w-3xl px-6">
         <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">
           {service.title}

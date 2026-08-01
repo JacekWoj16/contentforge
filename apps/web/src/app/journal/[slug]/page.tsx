@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/JsonLd";
 import { RichText } from "@/components/RichText";
 import { mediaUrl } from "@/lib/media";
 import { metadataFromSeo } from "@/lib/seo";
+import { articleSchema, breadcrumbSchema } from "@/lib/structured-data";
 import { getArticleBySlug, getArticles } from "@/lib/strapi";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -35,6 +37,15 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <article className="py-16">
+      <JsonLd data={articleSchema(article)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Journal", path: "/journal" },
+          { name: article.title, path: `/journal/${article.slug}` },
+        ])}
+      />
+
       <div className="mx-auto max-w-2xl px-6">
         <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">
           {article.title}

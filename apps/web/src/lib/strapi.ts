@@ -78,14 +78,18 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
   return data[0] ?? null;
 }
 
-export async function getPageSlugs(): Promise<string[]> {
-  const { data } = await fetchFromCms<CollectionResponse<Pick<Page, "slug">>>(
+export async function getPageSlugs(): Promise<
+  { slug: string; updatedAt: string }[]
+> {
+  const { data } = await fetchFromCms<
+    CollectionResponse<{ slug: string; updatedAt: string }>
+  >(
     "pages",
-    { fields: ["slug"], pagination: { pageSize: 100 } },
+    { fields: ["slug", "updatedAt"], pagination: { pageSize: 100 } },
     { tags: ["page"] },
   );
 
-  return data.map((page) => page.slug);
+  return data;
 }
 
 /* --------------------------------------------------------------- services */
@@ -93,7 +97,10 @@ export async function getPageSlugs(): Promise<string[]> {
 export async function getServices(): Promise<Service[]> {
   const { data } = await fetchFromCms<CollectionResponse<Service>>(
     "services",
-    { fields: ["title", "slug", "summary", "icon"], sort: ["title:asc"] },
+    {
+      fields: ["title", "slug", "summary", "icon", "updatedAt"],
+      sort: ["title:asc"],
+    },
     { tags: ["service"] },
   );
 
@@ -122,7 +129,7 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
   const { data } = await fetchFromCms<CollectionResponse<CaseStudy>>(
     "case-studies",
     {
-      fields: ["title", "slug", "client", "industry", "challenge"],
+      fields: ["title", "slug", "client", "industry", "challenge", "updatedAt"],
       populate: { coverImage: true, results: true },
       sort: ["title:asc"],
     },
@@ -158,7 +165,7 @@ export async function getArticles(): Promise<Article[]> {
   const { data } = await fetchFromCms<CollectionResponse<Article>>(
     "articles",
     {
-      fields: ["title", "slug", "excerpt", "publishedAt"],
+      fields: ["title", "slug", "excerpt", "publishedAt", "updatedAt"],
       populate: { coverImage: true, author: { populate: { avatar: true } } },
       sort: ["publishedAt:desc"],
     },
@@ -200,6 +207,7 @@ export async function getGlobal(): Promise<Global | null> {
         populate: {
           logo: true,
           navigation: true,
+          socialLinks: true,
           defaultSeo: SEO_POPULATE,
         },
       },

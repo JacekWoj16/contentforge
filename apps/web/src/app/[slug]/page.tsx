@@ -17,7 +17,9 @@ export async function generateStaticParams() {
   const slugs = await getPageSlugs();
 
   // "home" is rendered by the root route, not by this one.
-  return slugs.filter((slug) => slug !== "home").map((slug) => ({ slug }));
+  return slugs
+    .filter(({ slug }) => slug !== "home")
+    .map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props) {
