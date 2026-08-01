@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  web:
+    name: Frontend checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --prefix apps/web
+
+      - name: Lint
+        run: npm run lint:web
+
+      - name: Typecheck
+        run: npm run typecheck:web
+
+      - name: Test
+        run: npm run test:web
+
+  cms:
+    name: CMS checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: apps/cms/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --prefix apps/cms
+
+      - name: Typecheck
+        run: npx --prefix apps/cms tsc --noEmit -p apps/cms/tsconfig.json
