@@ -224,7 +224,10 @@ Strapi returns no relations, components or media unless the request asks for
 them. Each query declares what it needs, per block type rather than with a
 wildcard, so a page request carries only the fields its blocks render.
 
-Every request carries cache tags. Time-based revalidation is one hour.
+Every request carries cache tags. A one-hour window is the fallback; in
+practice a CMS webhook expires the affected tags the moment an editor
+publishes, so a change appears in seconds. `POST /api/revalidate` maps the
+Strapi event to its tags and authenticates with a shared secret.
 
 ### Routing
 
