@@ -3,7 +3,13 @@ import type { Core } from '@strapi/strapi';
 import { isDatabaseClientKind } from '@strapi/database';
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database => {
-  const client = env('DATABASE_CLIENT', 'sqlite');
+  // No default: an unset DATABASE_CLIENT should fail loudly rather than
+  // silently fall back to sqlite, whose driver is not installed here.
+  const client = env('DATABASE_CLIENT');
+
+  if (!client) {
+    throw new Error('DATABASE_CLIENT is not set. Expected "postgres".');
+  }
 
   if (!isDatabaseClientKind(client)) {
     throw new Error(
