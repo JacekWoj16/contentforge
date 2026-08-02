@@ -248,6 +248,22 @@ its own file even if a CMS page shares that slug.
 
 ---
 
+### Previewing drafts
+
+An editor opens a draft from the admin panel and sees it rendered as a page,
+in an iframe, next to the form they are editing. The CMS builds a signed URL
+per entry; `/api/preview` checks the secret, turns on Next.js draft mode and
+redirects. From then on the CMS client asks Strapi for drafts and bypasses
+the cache, because a preview served from cache would show the version the
+editor just replaced.
+
+Draft mode is a cookie, so it follows the editor around the site until they
+visit `/api/preview/disable`. That endpoint exists precisely so an editor
+does not keep reviewing drafts while believing they are looking at the live
+site.
+
+---
+
 ## SEO
 
 - **Metadata** comes from the `shared.seo` component, with the site name and

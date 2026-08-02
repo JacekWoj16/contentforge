@@ -47,10 +47,16 @@ const config = ({ env }: Core.Config.Shared.ConfigParams) => ({
     config: {
       allowedOrigins: [env('CLIENT_URL', 'http://localhost:3000')],
       async handler(uid: string, { documentId, status }: { documentId: string; status: string }) {
+        // The panel reports 'modified' when an entry has a published
+        // version and newer unpublished edits. The Document Service only
+        // accepts 'draft' or 'published', and a modified entry is exactly
+        // the case a preview is for, so it resolves to the draft.
+        const documentStatus = status === 'published' ? 'published' : 'draft';
+
         const document = await strapi.documents(uid as never).findOne({
           documentId,
           fields: ['slug'],
-          status: status as 'draft' | 'published',
+          status: documentStatus,
         });
 
         if (!document) {
@@ -66,7 +72,7 @@ const config = ({ env }: Core.Config.Shared.ConfigParams) => ({
         const params = new URLSearchParams({
           secret: env('PREVIEW_SECRET', ''),
           pathname,
-          status,
+          status: documentStatus,
         });
 
         return `${env('CLIENT_URL', 'http://localhost:3000')}/api/preview?${params}`;
