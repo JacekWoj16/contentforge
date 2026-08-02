@@ -98,7 +98,11 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
   const { data } = await fetchFromCms<CollectionResponse<Page>>(
     "pages",
     { filters: { slug: { $eq: slug } }, populate: PAGE_POPULATE },
-    { tags: ["page", `page:${slug}`] },
+    // Blocks render entries through relations, so editing a case study or a
+    // service has to refresh the pages that already reference it. Adding a
+    // new entry is a separate act: an editor still has to place it in a
+    // block, which publishes the page and invalidates it by slug.
+    { tags: ["page", `page:${slug}`, "case-study", "service"] },
   );
 
   return data[0] ?? null;
