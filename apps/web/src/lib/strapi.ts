@@ -1,3 +1,4 @@
+import { draftMode } from "next/headers";
 import qs from "qs";
 
 import type {
@@ -25,15 +26,40 @@ type FetchOptions = {
  * serialised with qs because building those bracket strings by hand fails
  * silently rather than loudly.
  */
+/**
+ * Draft mode is a per-request cookie, and it is not available while pages are
+ * generated at build time. Treating that as "not previewing" is correct: a
+ * build renders published content.
+ */
+async function isPreviewing(): Promise<boolean> {
+  try {
+    const draft = await draftMode();
+    return draft.isEnabled;
+  } catch {
+    return false;
+  }
+}
+
 async function fetchFromCms<T>(
   path: string,
   params: Record<string, unknown> = {},
   { tags = [], revalidate = 3600 }: FetchOptions = {},
 ): Promise<T> {
-  const query = qs.stringify(params, { encodeValuesOnly: true });
+  const preview = await isPreviewing();
+
+  // Strapi returns published entries unless the request asks for drafts.
+  const query = qs.stringify(
+    preview ? { ...params, status: "draft" } : params,
+    { encodeValuesOnly: true },
+  );
   const url = `${STRAPI_URL}/api/${path}${query ? `?${query}` : ""}`;
 
-  const response = await fetch(url, { next: { tags, revalidate } });
+  // A preview must never be served from cache, or an editor would see the
+  // version their last save replaced.
+  const response = await fetch(
+    url,
+    preview ? { cache: "no-store" } : { next: { tags, revalidate } },
+  );
 
   if (!response.ok) {
     throw new Error(`CMS request failed: ${path} returned ${response.status}`);

@@ -52,8 +52,8 @@ export default async function ArticlePage({ params }: Props) {
         </h1>
 
         <p className="mt-4 text-sm text-neutral-500">
-          <time dateTime={article.publishedAt}>
-            {new Date(article.publishedAt).toLocaleDateString("en-GB", {
+          <time dateTime={(article.publishedAt ?? article.updatedAt)}>
+            {new Date((article.publishedAt ?? article.updatedAt)).toLocaleDateString("en-GB", {
               day: "numeric",
               month: "long",
               year: "numeric",
