@@ -46,7 +46,7 @@ export default async function CaseStudyPage({ params }: Props) {
         ])}
       />
 
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto max-w-5xl px-6">
         <p className="text-sm uppercase tracking-wide text-neutral-500">
           {caseStudy.client}
           {caseStudy.industry ? ` \u00b7 ${caseStudy.industry}` : ""}

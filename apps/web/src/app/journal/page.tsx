@@ -19,7 +19,7 @@ export default async function JournalPage() {
 
   return (
     <div className="py-16">
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto max-w-5xl px-6">
         <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">
           Journal
         </h1>

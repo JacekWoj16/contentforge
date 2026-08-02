@@ -6,14 +6,14 @@ import type { HeroBlock } from "@/types/cms";
 
 export function Hero({ heading, subheading, image, cta }: HeroBlock) {
   return (
-    <section className="border-b border-neutral-200 py-20">
-      <div className="mx-auto max-w-3xl px-6">
-        <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">
+    <section className="border-b border-neutral-200 py-24">
+      <div className="mx-auto max-w-5xl px-6">
+        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl text-neutral-900">
           {heading}
         </h1>
 
         {subheading ? (
-          <p className="mt-4 text-lg leading-relaxed text-neutral-600">
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-neutral-600">
             {subheading}
           </p>
         ) : null}

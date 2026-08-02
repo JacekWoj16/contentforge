@@ -9,7 +9,7 @@ export function CaseStudyList({ heading, caseStudies }: CaseStudyListBlock) {
 
   return (
     <section className="border-b border-neutral-200 py-16">
-      <div className="mx-auto max-w-4xl px-6">
+      <div className="mx-auto max-w-5xl px-6">
         {heading ? (
           <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">
             {heading}
@@ -41,16 +41,16 @@ export function CaseStudyList({ heading, caseStudies }: CaseStudyListBlock) {
                 ) : null}
 
                 {caseStudy.results.length > 0 ? (
-                  <dl className="mt-4 flex flex-wrap gap-x-10 gap-y-3">
+                  <dl className="mt-5 flex flex-wrap gap-x-12 gap-y-4">
                     {caseStudy.results.map((result, index) => (
                       <div key={`${result.label}-${index}`}>
                         <dt className="text-sm text-neutral-500">
                           {result.label}
                         </dt>
-                        <dd className="text-lg font-medium text-neutral-900">
+                        <dd className="mt-1 text-2xl font-semibold tracking-tight text-neutral-900">
                           {result.value}
                           {result.unit ? (
-                            <span className="ml-0.5 text-neutral-500">
+                            <span className="ml-1 text-base font-normal text-neutral-500">
                               {result.unit}
                             </span>
                           ) : null}

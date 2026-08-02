@@ -9,7 +9,7 @@ export function ServicesGrid({ heading, intro, services }: ServicesGridBlock) {
 
   return (
     <section className="border-b border-neutral-200 py-16">
-      <div className="mx-auto max-w-4xl px-6">
+      <div className="mx-auto max-w-5xl px-6">
         {heading ? (
           <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">
             {heading}
@@ -22,7 +22,7 @@ export function ServicesGrid({ heading, intro, services }: ServicesGridBlock) {
           </p>
         ) : null}
 
-        <ul className="mt-10 grid gap-8 sm:grid-cols-2">
+        <ul className="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2">
           {services.map((service) => (
             <li key={service.documentId}>
               <h3 className="text-lg font-medium text-neutral-900">

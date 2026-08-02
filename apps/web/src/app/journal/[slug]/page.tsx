@@ -46,7 +46,7 @@ export default async function ArticlePage({ params }: Props) {
         ])}
       />
 
-      <div className="mx-auto max-w-2xl px-6">
+      <div className="mx-auto max-w-5xl px-6">
         <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">
           {article.title}
         </h1>

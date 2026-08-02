@@ -1,26 +1,16 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/**
+ * The site ships a single light theme.
+ *
+ * The generated stylesheet included a prefers-color-scheme block that set a
+ * dark background on body. Rules outside a cascade layer beat Tailwind
+ * utilities, which live in one, so that background won over the classes in
+ * the layout while the component text colours stayed dark. A second theme
+ * would need a dark variant on every colour and a contrast pass over both,
+ * which is more than this project needs.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }

@@ -4,7 +4,7 @@ import type { CtaBannerBlock } from "@/types/cms";
 export function CtaBanner({ heading, text, cta }: CtaBannerBlock) {
   return (
     <section className="bg-neutral-900 py-16">
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto max-w-5xl px-6">
         <h2 className="text-2xl font-semibold tracking-tight text-white">
           {heading}
         </h2>

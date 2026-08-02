@@ -442,6 +442,7 @@ const pages = [
 const global = {
   siteName: 'ContentForge Studio',
   navigation: [
+    { label: 'About', href: '/about', isExternal: false },
     { label: 'Services', href: '/services', isExternal: false },
     { label: 'Work', href: '/work', isExternal: false },
     { label: 'Journal', href: '/journal', isExternal: false },

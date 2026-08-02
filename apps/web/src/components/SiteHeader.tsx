@@ -12,7 +12,7 @@ export function SiteHeader({ global }: { global: Global | null }) {
 
   return (
     <header className="border-b border-neutral-200">
-      <div className="mx-auto flex max-w-4xl items-center justify-between gap-6 px-6 py-5">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-6 px-6 py-5">
         <SmartLink
           href="/"
           className="text-sm font-semibold tracking-tight text-neutral-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-900"
